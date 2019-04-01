@@ -16,8 +16,12 @@ set(CMAKE_CXX_STANDARD 14)
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
+# Note that qlib is an external dependency of this project. It is expected
+# be in the same directory as this checkout.
+
 include_directories(
     .
+    ../..
 )
 
 add_subdirectory(api)

@@ -17,4 +17,5 @@ TEST_CASE("version", "unit")
 {
     // ensure that 'version' returns a non-empty string
     REQUIRE(api::version().empty() == false);
+    REQUIRE(api::wversion().empty() == false);
 }

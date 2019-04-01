@@ -9,6 +9,7 @@
  * or copy at https://www.boost.org/LICENSE_1_0.txt
  */
 
+#include <qlib/qlib.h>
 #include "api.h"
 
 namespace api {
@@ -16,6 +17,11 @@ namespace api {
 std::string version(void)
 {
     return "0.0";
+}
+
+std::wstring wversion(void)
+{
+    return boost::lexical_cast<std::wstring>(version());
 }
 
 }   // end api namespace

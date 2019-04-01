@@ -21,4 +21,6 @@ namespace api {
  */
 extern std::string version(void);
 
+extern std::wstring wversion(void);
+
 }   // end api namespace
