@@ -16,10 +16,11 @@ set(CMAKE_CXX_STANDARD 14)
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
-### include_directories(
-###     .
-### )
+include_directories(
+    .
+)
 
+add_subdirectory(api)
 add_subdirectory(test)
 
 #### The test executable

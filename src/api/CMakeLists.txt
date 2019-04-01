@@ -1,10 +1,9 @@
-# Cmake file for building the qStub test executable
+# Cmake file for building the API library
 #
 # Copyright Igor Siemienowicz 2018
 # Distributed under the Boost Software License, Version 1.0. (See
 # accompanying file LICENSE_1_0.txt or copy at
 # https://www.boost.org/LICENSE_1_0.txt)
 
-file (GLOB_RECURSE TEST_SRC *.cpp)
-add_executable(test-qstub ${TEST_SRC})
-target_link_libraries(test-qstub api)
+file(GLOB_RECURSE API_SRC *.cpp)
+add_library(api ${API_SRC})
