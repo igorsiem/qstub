@@ -16,6 +16,8 @@ using namespace fmt::literals;
 
 #include <qlib/qlib.h>
 
+#include <api/api.h>
+
 #include "config.h"
 #include "logging.h"
 #include "mainwindow.h"
@@ -53,6 +55,10 @@ int main(int argc, char *argv[])
             logging::logger().log(
                 logging::level_t::info
                 , L"application starting");
+
+            logging::logger().log(
+                logging::level_t::info
+                , L"API version {}"_format(api::wversion()));
 
             QApplication a(argc, argv);
             MainWindow w;

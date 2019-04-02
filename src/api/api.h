@@ -20,10 +20,13 @@
 namespace api {
 
 /**
- * Retrieve the version string for hte library
+ * \brief Retrieve the version string for the library
  */
 extern std::string version(void);
 
+/**
+ * \brief Retrieve the version (wide) string for the library
+ */
 extern std::wstring wversion(void);
 
 }   // end api namespace

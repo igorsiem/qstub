@@ -22,6 +22,7 @@ add_executable(qstub-gui ${GUI_SRC} ${UI_HEADERS})
 target_link_libraries(qstub-gui
     Qt5::Widgets
     ${CONAN_LIBS}
+    api
 )
 
 # If we're running under windows, we need the Qt DLLs with our GUI executable

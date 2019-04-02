@@ -85,7 +85,9 @@ end
 desc "run the application"
 task :run => :bin do
 
-    sh "build/bin/#{$project_name}-gui"
+    sh "build/bin/#{$project_name}-gui " +
+        "--logging-level DEB " +
+        ""
 
 end
 
@@ -94,6 +96,7 @@ namespace :run do
     task :help => :bin do
         sh "build/bin/#{$project_name}-gui --help"
     end
+    
 end
 
 ###directory "build/docs"

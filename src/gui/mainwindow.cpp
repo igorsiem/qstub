@@ -9,6 +9,14 @@
  * or copy at https://www.boost.org/LICENSE_1_0.txt
  */
 
+#include <QHBoxLayout>
+#include <QLabel>
+
+#include <fmt/format.h>
+using namespace fmt::literals;
+
+#include <api/api.h>
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -17,6 +25,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    // Add a label for the API version
+    ui->centralWidget->setLayout(new QHBoxLayout(ui->centralWidget));
+    ui->centralWidget->layout()->addWidget(
+        new QLabel(
+            QString::fromStdString(
+                "API version: {}"_format(api::version()))));
 }   // end constructor
 
 MainWindow::~MainWindow()
