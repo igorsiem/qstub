@@ -10,10 +10,14 @@
  */
 
 #include <QApplication>
-#include <QDebug>
+
+#include <fmt/format.h>
+using namespace fmt::literals;
 
 #include <qlib/qlib.h>
 
+#include "config.h"
+#include "logging.h"
 #include "mainwindow.h"
 
 /**
@@ -31,46 +35,47 @@
 int main(int argc, char *argv[])
 {
 
-    // Set up the logger to send messages to the Qt output streams
-    //
-    // TODO abstract this out into a separate function, that also takes
-    // program options into account.
-    qlib::logger::instance().add(
-        { qlib::logger::level_t::error }
-        , [](qlib::logger::level_t, const std::wstring& msg)
-            {
-                qCritical() << qPrintable(QString::fromStdWString(msg));
-            });
+    int result = 0;
 
-    qlib::logger::instance().add(
-        { qlib::logger::level_t::warning }
-        , [](qlib::logger::level_t, const std::wstring& msg)
-            {
-                qWarning() << qPrintable(QString::fromStdWString(msg));
-            });
+    try
+    {
 
-    qlib::logger::instance().add(
-        { qlib::logger::level_t::info }
-        , [](qlib::logger::level_t, const std::wstring& msg)
-            {
-                qInfo() << qPrintable(QString::fromStdWString(msg));
-            });
+        // Config and logging
+        bst::po::variables_map vm;
+        bool help_signalled = false;
+        parse_command_line(argc, argv, vm, help_signalled);
+        logging::setup(vm);
 
-    qlib::logger::instance().add(
-        { qlib::logger::level_t::debug }
-        , [](qlib::logger::level_t, const std::wstring& msg)
-            {
-                qDebug() << qPrintable(QString::fromStdWString(msg));
-            });
+        // If we didn't ask for help, run the application
+        if (!help_signalled)
+        {
 
-    qlib::logger::instance().log(
-        qlib::logger::level_t::info
-        , L"application starting");
+            logging::logger().log(
+                logging::level_t::info
+                , L"application starting");
 
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
+            QApplication a(argc, argv);
+            MainWindow w;
+            w.show();
 
-    return a.exec();
+            result = a.exec();
+
+        }   // end if we want to run the application
+
+    }   // end try block
+    catch (const std::exception& error)
+    {
+        std::cerr << "[ERR] " << error.what() << std::endl;
+        result = -1;
+    }
+    catch (...)
+    {
+        std::cerr << "[ERR] unrecognised exception" << std::endl;    }
+
+    logging::logger().log(
+        logging::level_t::debug
+        , L"application exiting with result {}"_format(result));
+
+    return result;
 
 }   // end main function

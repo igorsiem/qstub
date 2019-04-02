@@ -75,18 +75,25 @@ def get_qt_location
     end
 end
 
+# When in *nix, need to set the Qt plugin path to the conan installation
+# of Qt.
+if !Rake::Win32::windows?
+    ENV['QT_PLUGIN_PATH'] = "#{get_qt_location}/plugins"
+    puts "set QT_PLUGIN_PATH to #{ENV['QT_PLUGIN_PATH']}"
+end
+
 desc "run the application"
 task :run => :bin do
 
-    # When in *nix, need to set the Qt plugin path to the conan installation
-    # of Qt.
-    if !Rake::Win32::windows?
-        ENV['QT_PLUGIN_PATH'] = "#{get_qt_location}/plugins"
-        puts "set QT_PLUGIN_PATH to #{ENV['QT_PLUGIN_PATH']}"
-    end
-
     sh "build/bin/#{$project_name}-gui"
 
+end
+
+namespace :run do
+
+    task :help => :bin do
+        sh "build/bin/#{$project_name}-gui --help"
+    end
 end
 
 ###directory "build/docs"
