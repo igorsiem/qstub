@@ -1,4 +1,4 @@
-# Cmake file for building the qStub test executable
+# Cmake file for building the test executable
 #
 # Copyright Igor Siemienowicz 2018
 # Distributed under the Boost Software License, Version 1.0. (See

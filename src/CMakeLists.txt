@@ -10,28 +10,22 @@ project(qStub LANGUAGES CXX)
 # set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD 14)
 
-### find_package (Threads)
-
 # Using conan for dependencies
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
+add_definitions(${CONAN_DEFINES})
+
 # Note that qlib is an external dependency of this project. It is expected
-# be in the same directory as this checkout.
+# be in the same directory as this checkout. At some point, qLib should be
+# packaged for conan as well.
 
 include_directories(
     .
     ../..
+    ${CONAN_INCLUDE_DIRS_QT}/QtWidgets
 )
 
 add_subdirectory(api)
+add_subdirectory(gui)
 add_subdirectory(test)
-
-#### The test executable
-###
-###file (GLOB TEST_SRC test/*.cpp)
-###add_executable(test-qlib ${TEST_SRC})
-###target_link_libraries(test-qlib PRIVATE
-###    ${CONAN_LIBS}
-###    ${CMAKE_THREAD_LIBS_INIT}
-###)

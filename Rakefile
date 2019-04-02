@@ -61,6 +61,11 @@ task :test => :bin do
     sh "build/bin/test-#{$project_name}"
 end
 
+desc "run the application"
+task :run => :bin do
+    sh "build/bin/#{$project_name}-gui"
+end
+
 ###directory "build/docs"
 ###
 ###desc "build doxygen docs"

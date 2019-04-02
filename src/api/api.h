@@ -11,6 +11,9 @@
 
 #include <string>
 
+#ifndef _api_api_h_included
+#define _api_api_h_included
+
 /**
  * Declarations for the Application Programming Interface to the core logic
  */
@@ -24,3 +27,5 @@ extern std::string version(void);
 extern std::wstring wversion(void);
 
 }   // end api namespace
+
+#endif
