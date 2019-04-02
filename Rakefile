@@ -61,9 +61,32 @@ task :test => :bin do
     sh "build/bin/test-#{$project_name}"
 end
 
+# Retrieve the location of Qt from conan
+def get_qt_location
+    cmd_str = "conan info qt/5.12.2@bincrafters/stable " +
+        "--package-filter \"qt*\" " +
+        "--paths --only package_folder " +
+        ""
+
+    resp_str = `#{cmd_str}`
+
+    resp_str.lines.each do |line|
+        return line.split(": ")[1].strip if line.include?("package_folder")
+    end
+end
+
 desc "run the application"
 task :run => :bin do
+
+    # When in *nix, need to set the Qt plugin path to the conan installation
+    # of Qt.
+    if !Rake::Win32::windows?
+        ENV['QT_PLUGIN_PATH'] = "#{get_qt_location}/plugins"
+        puts "set QT_PLUGIN_PATH to #{ENV['QT_PLUGIN_PATH']}"
+    end
+
     sh "build/bin/#{$project_name}-gui"
+
 end
 
 ###directory "build/docs"
