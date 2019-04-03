@@ -79,7 +79,7 @@ end
 # of Qt.
 if !Rake::Win32::windows?
     ENV['QT_PLUGIN_PATH'] = "#{get_qt_location}/plugins"
-    puts "set QT_PLUGIN_PATH to #{ENV['QT_PLUGIN_PATH']}"
+    # puts "set QT_PLUGIN_PATH to #{ENV['QT_PLUGIN_PATH']}"
 end
 
 desc "run the application"
