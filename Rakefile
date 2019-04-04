@@ -99,14 +99,14 @@ namespace :run do
     
 end
 
-###directory "build/docs"
-###
-###desc "build doxygen docs"
-###task :docs => "build/docs" do
-###    sh "doxygen"
-###end
+directory "build/docs"
 
-###desc "build tests, run tests and build docs"
-###task :all => [:bin, :test, :docs]
-###
-###task :default => :all
+desc "build doxygen docs"
+task :docs => "build/docs" do
+    sh "doxygen"
+end
+
+desc "build tests, run tests and build docs"
+task :all => [:bin, :test, :docs]
+
+task :default => :all

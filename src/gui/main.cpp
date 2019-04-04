@@ -1,5 +1,5 @@
 /**
- * \file main.h
+ * \file main.cpp
  * Entry point for the GUI executable
  * 
  * \author Igor Siemienowicz
