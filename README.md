@@ -8,7 +8,12 @@ started.
 
 ## Usage Notes
 
-TBD
+Starting a project using *qStub* is simply a matter of copying the files
+in the qStub checkout and updating the "Config" section at the top of the
+Rakefile. There *may* be some fiddling with conan installations (see below),
+but everything should just build 'as is'.
+
+Don't forget to edit this README for your new project!
 
 ## Build Notes
 

@@ -1,4 +1,4 @@
-# Top-level Cmake project file for building qStub
+# Top-level Cmake project file
 #
 # Copyright Igor Siemienowicz 2018
 # Distributed under the Boost Software License, Version 1.0. (See
@@ -6,7 +6,7 @@
 # https://www.boost.org/LICENSE_1_0.txt)
 
 cmake_minimum_required(VERSION 3.10)
-project(qStub LANGUAGES CXX)
+project($ENV{QPRJ_PROJECT_NAME} LANGUAGES CXX)
 # set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD 14)
 

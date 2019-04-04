@@ -18,11 +18,11 @@ qt5_wrap_ui(UI_HEADERS ${UI_FILES})
 
 # GUI executable
 file (GLOB_RECURSE GUI_SRC *.cpp *.rc *.qrc)
-add_executable(qstub-gui ${GUI_SRC} ${UI_HEADERS})
-target_link_libraries(qstub-gui
+add_executable($ENV{QPRJ_PROJECT_NAME}-gui ${GUI_SRC} ${UI_HEADERS})
+target_link_libraries($ENV{QPRJ_PROJECT_NAME}-gui
     Qt5::Widgets
     ${CONAN_LIBS}
-    api
+    $ENV{QPRJ_PROJECT_NAME}-api
 )
 
 # If we're running under windows, we need the Qt DLLs with our GUI executable

@@ -6,5 +6,7 @@
 # https://www.boost.org/LICENSE_1_0.txt)
 
 file (GLOB_RECURSE TEST_SRC *.cpp)
-add_executable(test-qstub ${TEST_SRC})
-target_link_libraries(test-qstub api)
+add_executable(test-$ENV{QPRJ_PROJECT_NAME} ${TEST_SRC})
+target_link_libraries(test-$ENV{QPRJ_PROJECT_NAME}
+    $ENV{QPRJ_PROJECT_NAME}-api
+)

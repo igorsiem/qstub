@@ -8,8 +8,14 @@
 # --- Config ---
 
 $project_name = "qstub"
+$project_version = "0.1"
+$project_description = "Stub implementation of Qt-based windowing app"
 
 # --- End Config ---
+
+ENV['QPRJ_PROJECT_NAME'] = $project_name
+ENV['QPRJ_PROJECT_VERSION'] = $project_version
+ENV['QPRJ_PROJECT_DESCRIPTION'] = $project_description
 
 directory "build"
 
