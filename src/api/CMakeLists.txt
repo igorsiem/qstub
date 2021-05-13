@@ -6,4 +6,4 @@
 # https://www.boost.org/LICENSE_1_0.txt)
 
 file(GLOB_RECURSE API_SRC *.cpp)
-add_library($ENV{QPRJ_PROJECT_NAME}-api ${API_SRC})
+add_library(${QPRJ_PROJECT_NAME}-api ${API_SRC})

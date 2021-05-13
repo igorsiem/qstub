@@ -2,7 +2,7 @@
 boost/1.69.0@conan/stable
 Catch2/2.7.0@catchorg/stable
 fmt/5.3.0@bincrafters/stable
-qt/5.12.2@bincrafters/stable
+qt/5.15.2@bincrafters/stable
 
 [generators]
 cmake
