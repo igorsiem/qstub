@@ -1,8 +1,8 @@
 [requires]
-boost/1.69.0@conan/stable
+boost/1.69.0
 Catch2/2.7.0@catchorg/stable
-fmt/5.3.0@bincrafters/stable
-qt/5.15.2@bincrafters/stable
+fmt/5.3.0
+qt/5.15.2
 
 [generators]
 cmake

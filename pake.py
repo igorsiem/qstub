@@ -2,6 +2,7 @@ import argparse
 import os
 import shutil
 from pathlib import Path
+import platform
 
 # --- Config ---
 project_name = 'qstub'
@@ -117,6 +118,9 @@ def run_gui():
     Raises:
         RuntimeError: The test executable returned a non-zero exit code
     """
+    if platform.system() == 'Linux':
+        os.environ['FONTCONFIG_PATH'] = '/etc/fonts'
+        
     test_command = Path(build_dir_path) / Path("bin") / Path("{}-gui".format(project_name))
     error = os.system("{}".format(test_command))
     if error != 0:
