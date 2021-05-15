@@ -3,6 +3,7 @@ import os
 import shutil
 from pathlib import Path
 import platform
+import subprocess
 
 # --- Config ---
 project_name = 'qstub'
@@ -126,8 +127,31 @@ def run_gui():
     if error != 0:
         raise RuntimeError("running GUI returned exit code {}".format(error))
 
+def show_include_paths():
+    """Retrieve the conan package paths to use in include files
+    """
+    cmd = "conan info --paths --only package_folder {}".format(src_dir_path)
+    result = subprocess.run(cmd.split(' '), stdout=subprocess.PIPE).stdout.decode()
+
+    for line in result.split('\n'):
+        if ':' in line:
+            print("\"{}/**\",".format(line.split(': ')[1].strip().replace('\\', '/')))
+
 # Parse command line and execute
-parser = argparse.ArgumentParser(description='Lightweight make / build tool')
+parser = argparse.ArgumentParser(
+    formatter_class=argparse.RawDescriptionHelpFormatter,
+    description="""
+Lightweight make / build tool"
+
+Any number of targets may be requested.
+
+    clean       Clean the build directory
+    conan       Run conan installation
+    cmake       Run cmake to create build files (runs 'conan')
+    build       Build the binaries (runs 'cmake')
+    test        Run the test binary (runs 'build')
+    includes    Retrieve the locations of conan packages for the include list in vscode
+""")
 parser.add_argument('targets',
     metavar='T',
     nargs='+',
@@ -157,5 +181,7 @@ for t in args.targets:
         run_cmake()
         build_binaries()
         run_gui()
+    elif t == 'includes':
+        show_include_paths()
     else:
         raise argparse.ArgumentError(None, "unrecognised target '{}'".format(t))
